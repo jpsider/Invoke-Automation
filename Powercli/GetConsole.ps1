@@ -31,7 +31,7 @@ Assumptions:
 #>
 
 #=======================================================================================
-function GetConsoleUrl($vmName, $hypVersion) {
+function Get-ConsoleUrl($vmName, $hypVersion) {
 	if ($hypVersion -eq 6){
 		$ConsolePort = 9443 
 		$myVM = Get-VM $vmName
