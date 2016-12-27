@@ -9,7 +9,7 @@ function Get-ConsoleUrl {
     <#
     .SYNOPSIS
         Name:Get-ConsoleURL.ps1
-        Download Link: https://github.com/jpsider/invoke-automation/powercli/getConsole.ps1
+        Download Link: https://github.com/jpsider/Invoke-Automation/blob/master/Powercli/GetConsole.ps1
         Requirements: 
     	    Powershell 3.0
     	    Powercli 5.5 or greater
