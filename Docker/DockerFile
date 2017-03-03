@@ -1,0 +1,35 @@
+# Invoke-Automation Windows Dockerfile
+
+# Indicates that the windowsservercore image will be used as the base image.
+FROM microsoft/windowsservercore
+
+# Metadata indicating an image maintainer.
+MAINTAINER @jpsider
+
+# Copy install files to the container
+COPY mysql-connector.msi c:/temp/
+COPY powercli.exe c:/temp/
+
+# Install PowerCLI
+RUN powershell Start-Process c:\temp\powercli.exe -ArgumentList '/s /qn /w /V"/qr"' -Wait
+
+# Move PowerCLI Modules to correct Directory
+RUN powershell Move-Item -Path 'C:\Program Files (x86)\VMware\Infrastructure\PowerCLI\Modules\*' -Destination 'C:\Program Files\WindowsPowerShell\Modules'
+
+# Install MySql connector
+RUN powershell Start-Process c:\temp\mysql-connector.msi -ArgumentList '/quiet /passive' -Wait
+
+# Copy PowerWamp Module to container
+ADD https://raw.github.com/jpsider/PowerWamp/master/powerWamp.psm1 c:/temp/
+
+# Copy PowerLumber Module to container
+ADD https://raw.github.com/jpsider/PowerLumber/master/PowerLumber.psm1 c:/temp/
+
+# Add powershell script
+COPY verifyInstall.ps1 c:/temp/
+
+# Validate Imported Modules
+RUN powershell -executionpolicy bypass c:\temp\verifyInstall.ps1
+
+# Sets a command or process that will run each time a container is run from the new image.
+CMD [ "powershell" ]
