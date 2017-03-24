@@ -9,9 +9,17 @@ MAINTAINER @jpsider
 # Copy install files to the container
 COPY mysql-connector.msi c:/temp/
 COPY powercli.exe c:/temp/
+COPY PowervRA.zip c:/temp/
+COPY Vester.zip c:/temp/
 
 # Install PowerCLI
 RUN powershell Start-Process c:\temp\powercli.exe -ArgumentList '/s /qn /w /V"/qr"' -Wait
+
+# Unzip PowervRA
+RUN powershell Expand-Archive C:\temp\PowervRA.zip -DestinationPath 'C:\temp'
+
+# Unzip PowervRA
+RUN powershell Expand-Archive C:\temp\Vester.zip -DestinationPath 'C:\temp'
 
 # Move PowerCLI Modules to correct Directory
 RUN powershell Move-Item -Path 'C:\Program Files (x86)\VMware\Infrastructure\PowerCLI\Modules\*' -Destination 'C:\Program Files\WindowsPowerShell\Modules'
@@ -25,11 +33,17 @@ ADD https://raw.github.com/jpsider/PowerWamp/master/powerWamp.psm1 c:/temp/
 # Copy PowerLumber Module to container
 ADD https://raw.github.com/jpsider/PowerLumber/master/PowerLumber.psm1 c:/temp/
 
+# Copy PowerNSX Module to container
+ADD https://raw.github.com/vmware/powernsx/master/PowerNSX.psm1 c:/temp/
+
+# Copy PowervRA Module to container
+ADD https://raw.github.com/jakkulabs/PowervRA/master/PowervRA/PowervRA.psm1 c:/temp/
+
 # Add powershell script
-COPY verifyInstall.ps1 c:/temp/
+COPY ImportModules.ps1 c:/temp/
 
 # Validate Imported Modules
-RUN powershell -executionpolicy bypass c:\temp\verifyInstall.ps1
+RUN powershell -executionpolicy bypass c:\temp\ImportModules.ps1
 
 # Sets a command or process that will run each time a container is run from the new image.
 CMD [ "powershell" ]
