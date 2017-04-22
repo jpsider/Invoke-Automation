@@ -4,24 +4,16 @@
 FROM microsoft/nanoserver
 
 # Metadata indicating an image maintainer.
-MAINTAINER @jpsider
+MAINTAINER jpsider
 
-# Copy install files to the container
-COPY mysql-connector.exe c:/temp/
-COPY PowerCLI.zip c:/temp/
-COPY verifyInstall.ps1 c:/temp/
+# Copy PowerNSX Module to container
+ADD https://raw.github.com/vmware/powernsx/master/PowerNSX.psm1 c:/temp/
 
-# Install MySql connector
-RUN powershell Start-Process c:\temp\mysql-connector.exe -ArgumentList '/quiet /passive' -Wait
-
-# Copy PowerWamp Module to container
-ADD https://raw.github.com/jpsider/PowerWamp/master/powerWamp.psm1 c:/temp/
-
-# Copy PowerLumber Module to container
-ADD https://raw.github.com/jpsider/PowerLumber/master/PowerLumber.psm1 c:/temp/
+# Add powershell scripts
+COPY . c:/temp/
 
 # Validate Imported Modules
-RUN powershell -executionpolicy bypass c:\temp\verifyInstall.ps1 -ErrorAction SilentlyContinue
+RUN powershell -executionpolicy bypass c:\temp\InstallModules.ps1;c:\temp\ImportModules.ps1
 
-# Sets a command or process that will run each time a container is run from the new image.
-CMD [ "powershell" ]
+# Start powershell
+CMD [ "powershell" ] 
