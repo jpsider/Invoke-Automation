@@ -34,6 +34,8 @@ Install-Module pester -Force -SkipPublisherCheck -Confirm:$false; \
 Install-Module vester -Force -Confirm:$false; \
 Install-Module PowerWamp -Force -Confirm:$false; \
 Install-Module PowerLumber -Force -Confirm:$false; \
+Install-Module ImportExcel -Force -Confirm:$false; \
+Install-Module vDocumentation -Force -Confirm:$false; \
 #Current state of PowerNSX is unknown
 #Install-GitHubRepository -Owner vmware -Repository powernsx -Branch master -DestinationPath $env:programfiles\WindowsPowerShell\Modules; \
 Start-Process c:\temp\mysql-connector.msi -ArgumentList '/quiet /passive' -Wait; 

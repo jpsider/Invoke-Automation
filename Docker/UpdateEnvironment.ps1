@@ -57,6 +57,8 @@ function Start-Environment {
             'powervra',
             'powerwamp',
             'powerlumber',
+            'ImportExcel',
+            'vDocumentation',
             'vester'
         )
     )
