@@ -52,7 +52,7 @@ function Start-Environment {
 		#Create a list of Community Modules
         $moduleList = @(
             'VMware.PowerCLI',
-            #'powernsx',
+            'powernsx',
             'powervro',
             'powervra',
             'powerwamp',

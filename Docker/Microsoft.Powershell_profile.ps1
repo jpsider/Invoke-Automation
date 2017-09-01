@@ -32,9 +32,6 @@ Write-Host 'PSVersion: ' -NoNewline      ; Write-Host "     $($consoleStatusChec
 Write-Host 'PSEdition: ' -NoNewline      ; Write-Host "     $($consoleStatusCheck.PSEdition)" -ForegroundColor Green
 Write-Host ' '
 
-#Adding Hack until powerNSX construction is over.
-Import-Module c:\temp\PowerNSX.psm1
-
 Write-host 'Importing Modules'
 Start-PowerCLI
 Start-Environment
