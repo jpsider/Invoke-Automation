@@ -9,15 +9,15 @@ $SCRIPTDIR = split-path $MYINV.MyCommand.Path
 
 $verboseLogFile = "$SCRIPTDIR\vsphere65-NUC-lab-destruction.log"
 
-writeLog "Connecting to ESX host: $esxip"
+write-host "Connecting to ESX host: $esxip"
 Connect-viserver $esxip -user $ESXUser -pass $ESXPWD
 
 #Power off and remove vm's from inventory.
-writeLog "Powering off and removing virtual machines."
+write-host "Powering off and removing virtual machines."
 Get-vm | where { $_.PowerState -eq “PoweredOn”} | Stop-VM -confirm:$false
 Get-VM | Remove-VM -confirm:$false
 
-writeLog "Leaving vsan cluster"
+write-host "Leaving vsan cluster"
 $ESXCLI = Get-EsxCli -v2 -VMHost (get-VMHost)
 $esxcli.vsan.cluster.leave.invoke()
 
@@ -25,24 +25,24 @@ $VSANDisks = $esxcli.storage.core.device.list.invoke() | Where {$_.isremovable -
 $Performance = $VSANDisks[0]
 $Capacity = $VSANDisks[1]
 
-writeLog "Removing vSan Storage cluster"
+write-host "Removing vSan Storage cluster"
 $removal = $esxcli.vsan.storage.remove.CreateArgs()
 $removal.ssd = $performance.Device
 $esxcli.vsan.storage.remove.Invoke($removal)
 
-writeLog "Removing vSan Flash cluster"
+write-host "Removing vSan Flash cluster"
 $capacitytag = $esxcli.vsan.storage.tag.remove.CreateArgs()
 $capacitytag.disk = $Capacity.Device
 $capacitytag.tag = "capacityFlash"
 $esxcli.vsan.storage.tag.remove.Invoke($capacitytag)
 
-writeLog "remove syslog server settings."
+write-host "remove syslog server settings."
 Set-VMHostSysLogServer $null
 
-writeLog "Remove NTP server."
+write-host "Remove NTP server."
 Remove-VMHostNtpServer (Get-VMHostNtpServer) -Confirm:$false
 
-writeLog "Remove Synology Datastore"
+write-host "Remove Synology Datastore"
 Get-Datastore | where {$_.name -eq "synology"} | Remove-Datastore -Confirm:$false
 
-writeLog "All done"
+write-host "All done"

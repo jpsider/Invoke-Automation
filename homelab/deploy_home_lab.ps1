@@ -16,7 +16,8 @@ $StartTime = Get-Date
 
 writeLog "Writing Log files to $verboselogfile"
 
-If (-not (Test-Path "$($VCSACDDrive)vcsa-cli-installer\win32\vcsa-deploy.exe")){
+If (-not (Test-Path "$($VCSACDDrive)vcsa-cli-installer\win32\vcsa-deploy.exe"))
+{
     Write-Host "VCSA media not found at $($VCSACDDrive) please mount it and try again"
     return
 }
@@ -53,6 +54,9 @@ $Performance = $VSANDisks[0]
 $Capacity = $VSANDisks[1]
 "Using $($Capacity.Model) for Capacity disk" | Out-File -Append -LiteralPath $verboseLogFile
 
+writeLog "Using $($Performance.Model) for Performance disk"
+writeLog "Using $($Capacity.Model) for Capacity disk"
+
 writeLog "Tagging $($Capacity.Model) as Capacity ..."
 $capacitytag = $esxcli.vsan.storage.tag.add.CreateArgs()
 $capacitytag.disk = $Capacity.Device
@@ -87,10 +91,13 @@ invoke-expression “$($VCSACDDrive)vcsa-cli-installer\win32\vcsa-deploy.exe ins
 writeLog "Enable VSAN Traffic on VMKernel Network ..."
 $VMKernel = Get-VMHost $ESXIP | Get-VMHostNetworkAdapter -VMKernel | Where {$_.PortGroupName -eq $VMKNetforVSAN }
 $IsVSANEnabled = $VMKernel | Where { $_.VsanTrafficEnabled}
-If (-not $IsVSANEnabled) {
+If (-not $IsVSANEnabled)
+{
     writeLog "Enabling VSAN Kernel on $VMKernel ..."
     $VMKernel | Set-VMHostNetworkAdapter -VsanTrafficEnabled $true -Confirm:$false | Out-File -Append -LiteralPath $verboseLogFile
-} Else {
+}
+Else
+{
     writeLog "VSAN Kernel already enabled on $VmKernel ..."
 }
 
@@ -116,10 +123,10 @@ Get-VMHost | Set-VMHostSysLogServer -SysLogServer $VCIP | Out-File -Append -Lite
 
 writeLog "Acknowledging Alarms on the cluster ..."
 $alarmMgr = Get-View AlarmManager 
-Get-Cluster | where {$_.ExtensionData.TriggeredAlarmState} | %{
+Get-Cluster | where {$_.ExtensionData.TriggeredAlarmState} | % {
     $cluster = $_
-    $Cluster.ExtensionData.TriggeredAlarmState | %{
-        $alarmMgr.AcknowledgeAlarm($_.Alarm,$vm.ExtensionData.MoRef) | Out-File -Append -LiteralPath $verboseLogFile
+    $Cluster.ExtensionData.TriggeredAlarmState | % {
+        $alarmMgr.AcknowledgeAlarm($_.Alarm, $vm.ExtensionData.MoRef) | Out-File -Append -LiteralPath $verboseLogFile
     }
 }
 
@@ -181,7 +188,7 @@ writeLog "Applying License to ESX ..."
 Apply_ESX_License
 
 $EndTime = Get-Date
-$duration = [math]::Round((New-TimeSpan -Start $StartTime -End $EndTime).TotalMinutes,2)
+$duration = [math]::Round((New-TimeSpan -Start $StartTime -End $EndTime).TotalMinutes, 2)
 
 writeLog "================================"
 writeLog "vSphere Lab Deployment Complete!"
