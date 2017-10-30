@@ -32,8 +32,13 @@ Install-Module vester -Force -Confirm:$false; \
 Install-Module PowerWamp -Force -Confirm:$false; \
 Install-Module PowerLumber -Force -Confirm:$false; \
 Install-Module ImportExcel -Force -Confirm:$false; \
+Install-Module psscriptanalyzer -Force -Confirm:$false; \
 Install-Module vDocumentation -Force -Confirm:$false; \
+Install-Module pscodehealth -Force -Confirm:$false; \
+Install-Module psdeploy -Force -Confirm:$false; \
+Install-Module plaster -Force -Confirm:$false; \
 Install-Module powernsx -Force -Confirm:$false; \
+Install-Module powerrestcli -Force -Confirm:$false; \
 Start-Process c:\temp\mysql-connector.msi -ArgumentList '/quiet /passive' -Wait; 
 
 # Copy the Powershell profile script to correct directory

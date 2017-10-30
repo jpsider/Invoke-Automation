@@ -53,8 +53,8 @@ function Start-Environment {
         $moduleList = @(
             'VMware.PowerCLI',
             'powernsx',
-            #'powervro',
-            #'powervra',
+            'powervro',
+            'powervra',
             'powerwamp',
             'powerlumber',
             'vDocumentation',
@@ -62,6 +62,7 @@ function Start-Environment {
             'pscodehealth',
             'psdeploy',
             'plaster',
+            'powerrestcli',
             'vester'
         )
     )
@@ -100,6 +101,7 @@ function Get-Environment {
             'pscodehealth',
             'psdeploy',
             'plaster',            
+            'powerrestcli',            
             'vester'
         )
     )
