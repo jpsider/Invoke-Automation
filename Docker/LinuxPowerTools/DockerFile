@@ -1,0 +1,49 @@
+# Invoke-Automation PowerTools Windows Dockerfile
+
+# Indicates that the microsoft/powershell image will be used as the base image.
+FROM microsoft/powershell
+
+# Setup metadata (MAINTAINER is deprecated)
+LABEL \
+author="Justin Sider @jpsider" \
+description="This image is pre-configured with PowerShell \
+Modules maintained by VMware, as well as the \
+VMware community."
+
+# Copy PowerCLI settings file over which enables CEIP (removes 1st time prompt)
+### Need to review where to place this.
+# COPY PowerCLI_Settings.xml /Users/ContainerAdministrator/AppData/Roaming/VMware/PowerCLI/
+
+# Setup shell environment to PowerShell for RUN commands
+SHELL ["pwsh", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
+
+# Install VMware and Community Modules
+RUN Write-Output 'Installing PowerTools Modules...'; \
+Set-PSRepository -name PSGallery -InstallationPolicy Trusted; \
+Install-Module powervra -Force -Confirm:$false; \
+Install-Module powervro -Force -Confirm:$false; \
+Install-Module PowerLumber -Force -Confirm:$false; \
+Install-Module psscriptanalyzer -Force -Confirm:$false; \
+Install-Module vDocumentation -Force -Confirm:$false; \
+Install-Module psdeploy -Force -Confirm:$false; \
+Install-Module plaster -Force -Confirm:$false; \
+Install-Module powerrestcli -Force -Confirm:$false;
+
+# Future Add PowerCLI,PowerNSX
+
+# Copy the Powershell profile script to correct directory
+### Need to review the path
+COPY profile.ps1 /root/.config/powershell/profile.ps1
+COPY UpdateEnvironment.ps1 /root/.config/powershell/UpdateEnvironment.ps1
+
+# Start powershell
+CMD ["pwsh"]
+
+#=====================================================
+#  ____                       _____           _     
+# |  _ \ _____      _____ _ _|_   _|__   ___ | |___ 
+# | |_) / _ \ \ /\ / / _ \ '__|| |/ _ \ / _ \| / __|
+# |  __/ (_) \ V  V /  __/ |   | | (_) | (_) | \__ \
+# |_|   \___/ \_/\_/ \___|_|   |_|\___/ \___/|_|___/
+#                                                   
+#=====================================================
