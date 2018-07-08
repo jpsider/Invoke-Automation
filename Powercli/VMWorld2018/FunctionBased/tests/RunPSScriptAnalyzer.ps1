@@ -2,26 +2,27 @@
 
 Set-Location "C:\OPEN_PROJECTS\Invoke-Automation\Powercli\VMWorld2018\FunctionBased\"
 
-$foundError = $false
+$FoundError = $false
 
 $Directories = ("private", "public")
 foreach ($Directory in $Directories)
 {
-    $Results = Invoke-ScriptAnalyzer -Path .\$Directory -IncludeDefaultRules
-    if ($null -eq $Results) {
+    $AnalyzerResults = Invoke-ScriptAnalyzer -Path .\$Directory -IncludeDefaultRules
+    if ($null -eq $AnalyzerResults) {
         Write-Output "No Code issues found in directory: $Directory"
     } else {
-        $foundError = $true
+        $FoundError = $true
         Write-Output "Error found in Directory: $Directory"
-        Write-Output $Results
+        Write-Output $AnalyzerResults
     }
 }
-if ($foundError -eq $true)
+if ($FoundError -eq $true)
 {
-    # An error was found in the Unit tests.
+    # Script Analyzer found something. Oh No!
     Write-Error "An error has been found with PSScriptAnalyzer. Please review them before commiting the code."
 } 
 else
 {
+    # No Script Analyzer findings, Hooray!
     Write-Output "Nothing found with PSScriptAnalyzer! Hooray!"
 }

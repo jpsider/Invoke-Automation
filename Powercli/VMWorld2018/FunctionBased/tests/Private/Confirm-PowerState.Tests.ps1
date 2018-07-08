@@ -1,3 +1,7 @@
+$here = (Split-Path -Parent $MyInvocation.MyCommand.Path) -replace 'tests', ''
+$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
+. "$here\$sut"
+
 Describe "Confirm-PowerState function" {
     $VMdata = @{
         'Name' = "SomeVM"

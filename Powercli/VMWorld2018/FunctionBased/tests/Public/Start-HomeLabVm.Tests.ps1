@@ -1,3 +1,7 @@
+$here = (Split-Path -Parent $MyInvocation.MyCommand.Path) -replace 'tests', ''
+$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.tests\.', '.'
+. "$here\$sut"
+
 Describe "Start-HomeLabVm function" {
     function Confirm-vCenter {}
     function Confirm-PowerState {}
