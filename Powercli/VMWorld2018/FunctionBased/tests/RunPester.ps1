@@ -19,7 +19,7 @@ foreach ($Directory in $Directories)
     # Execute Pester for the Directory.
     $PesterResults = Invoke-pester .\tests\$Directory\*.ps1 -CodeCoverage .\$Directory\*.ps1 -PassThru
 
-    $MissedCommands = $resuPesterResultslts.CodeCoverage.NumberOfCommandsMissed
+    $MissedCommands = $PesterResults.CodeCoverage.NumberOfCommandsMissed
     $FailedCount = $PesterResults.FailedCount
     Write-Output "Missed commands: $MissedCommands - Failed Tests: $Failedcount"
     if (($MissedCommands -ne "0") -or ($FailedCount -ne "0"))

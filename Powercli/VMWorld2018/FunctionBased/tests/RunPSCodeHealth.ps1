@@ -29,7 +29,6 @@ foreach ($Directory in $Directories)
         Write-Output "Failed Tests for Directory: $Directory - ($FailedTests)"
     }
     # Open the Report in the default web browser.
-    write-host "$BaseDir\vmworldReport_$Directory.html"
     Start-Process ("file:///$BaseDir\vmworldReport_$Directory.html")
 }
 
