@@ -29,6 +29,8 @@
     <file source='' destination='${PLASTER_PARAM_ModuleName}\private'/>
     <file source='' destination='${PLASTER_PARAM_ModuleName}\classes'/>
     <file source='' destination='${PLASTER_PARAM_ModuleName}\data'/>
+    <file source='' destination='tests\public'/>
+    <file source='' destination='tests\private'/>
     <message>      Deploying files    </message>
     <file source='appveyor.yml' destination=''/>
     <file source='build.ps1' destination=''/>
