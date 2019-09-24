@@ -1,6 +1,7 @@
 site_name: <%= $PLASTER_PARAM_ModuleName %>
 repo_url: https://github.com/<%= $PLASTER_PARAM_GitHubUserName %>/<%= $PLASTER_PARAM_GitHubRepo %>
 theme: readthedocs
+edit_uri: edit/master/docs/
 pages:
 - Home: index.md
 - <%= $PLASTER_PARAM_ModuleName %> Basics:

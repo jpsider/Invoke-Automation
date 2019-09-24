@@ -8,9 +8,12 @@ $script:ManifestPath = "$Destination\$ModuleName.psd1"
 $script:Imports = ( 'private', 'public', 'classes' )
 $script:TestFile = "$PSScriptRoot\output\TestResults_PS$PSVersion`_$TimeStamp.xml"
 
+# Importing all build settings into the current scope for coveralls integration
+. ".\BuildSettings.ps1"
+
 Task Default Build, Pester, UpdateSource, Publish
 Task Build CopyToOutput, BuildPSM1, BuildPSD1
-Task Pester Build, ImportModule, UnitTests, FullTests
+Task Pester Build, ImportModule, UnitTests, FullTests, Publish_Unit_Tests_Coverage
 
 Task Clean {
     $null = Remove-Item $Output -Recurse -ErrorAction Ignore
@@ -23,6 +26,12 @@ Task UnitTests {
     {
         Write-Error "Failed [$($TestResults.FailedCount)] Pester tests"
     }
+}
+
+Task Publish_Unit_Tests_Coverage {
+    $TestResults = Invoke-Pester -Path Tests\*\* -CodeCoverage $ModuleName\*\* -PassThru -Tag Build -ExcludeTag Slow
+    $Coverage = Format-Coverage -PesterResults $TestResults -CoverallsApiToken $ENV:Coveralls_Key -BranchName $ENV:APPVEYOR_REPO_BRANCH
+    Publish-Coverage -Coverage $Coverage
 }
 
 Task FullTests {
@@ -87,7 +96,6 @@ Task NextPSGalleryVersion -if (-Not ( Test-Path "$output\version.xml" ) ) -Befor
 }
 
 Task BuildPSD1 -inputs (Get-ChildItem $Source -Recurse -File) -Outputs $ManifestPath {
-   
     Write-Output "  Update [$ManifestPath]"
     Copy-Item "$source\$ModuleName.psd1" -Destination $ManifestPath
 
