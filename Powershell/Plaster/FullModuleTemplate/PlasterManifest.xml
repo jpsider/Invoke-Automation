@@ -44,6 +44,8 @@
     <templateFile source='readme.md' destination=''/>
     <templateFile source='LICENSE' destination=''/>
     <templateFile source='module.build.ps1' destination=''/>
+    <templateFile source='module\public\Disable-SSLValidation.ps1' destination='${PLASTER_PARAM_ModuleName}\public\Disable-SSLValidation.ps1'/>
+    <templateFile source='module\private\Disable-SSLValidation.ps1' destination='${PLASTER_PARAM_ModuleName}\private\Disable-SSLValidation.ps1'/>	
     <templateFile source='docs\about.md' destination=''/>
     <templateFile source='docs\acknowledgements.md' destination=''/>
     <templateFile source='docs\index.md' destination=''/>
@@ -56,6 +58,8 @@
     <templateFile source='tests\RunPSCodeHealth.ps1' destination=''/>
     <templateFile source='tests\RunPSScriptAnalyzer.ps1' destination=''/>
     <templateFile source='tests\RunPester.ps1' destination=''/>
+    <templateFile source='tests\public\Disable-SSLValidation.Tests.ps1' destination=''/>
+    <templateFile source='tests\private\Disable-SSLValidation.Tests.ps1' destination=''/>	
 	<templateFile source='spec\module.feature' destination=''/>
     <file source='module\module.psm1' destination='${PLASTER_PARAM_ModuleName}\${PLASTER_PARAM_ModuleName}.psm1'/>
     <newModuleManifest destination='${PLASTER_PARAM_ModuleName}\${PLASTER_PARAM_ModuleName}.psd1' moduleVersion='$PLASTER_PARAM_Version' rootModule='${PLASTER_PARAM_ModuleName}.psm1' author='$PLASTER_PARAM_FullName' description='$PLASTER_PARAM_ModuleDesc' encoding='UTF8-NoBOM'/>
