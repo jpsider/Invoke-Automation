@@ -12,6 +12,8 @@ Function Confirm-PowerState{
 }
 # Invoke-ScriptAnalyzer -Path .\demo03.ps1
 # Invoke-Pester -Script .\demo04.tests.ps1 -CodeCoverage .\demo04.ps1
+
+
     <#
 	.DESCRIPTION
         This function will confirm a virtual machines PowerState.

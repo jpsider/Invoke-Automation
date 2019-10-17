@@ -1,4 +1,4 @@
-function Start-VMlist{
+function Start-VMlist {
     <#
 	.DESCRIPTION
 		This function will attempt to power on all vm's found in a vCenter. This is not a recommended practice!
