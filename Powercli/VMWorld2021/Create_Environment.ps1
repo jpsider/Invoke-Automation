@@ -2,7 +2,7 @@
 Connect-VIServer 192.168.2.220 -User administrator -Password VMware1!
 $vmhost = "192.168.2.203"
 
-# Create a VM, take a snapshot
+# Create a VM, take a snapshot.
 
 #----------------- Start of code capture -----------------
 
