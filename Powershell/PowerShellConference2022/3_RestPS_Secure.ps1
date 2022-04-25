@@ -7,6 +7,7 @@
 You can take advantage of SSL certificates to apply three different types of security based on your business needs.
 
 * Enabling an Endpoint with SSL
+* Validate the client has a Certificate
 * Client Verification
     * Access list
 * Client Authentication

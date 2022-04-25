@@ -26,45 +26,7 @@ When you start an Endpoint you can specify several different parameters:
   carbon
 
 ### Here is the example Routes JSON file included in the RestPS module:
-<#
-[
-  {
-    "RequestType": "GET",
-    "RequestURL": "/proc",
-    "RequestCommand": "Get-Process -ProcessName PowerShell -ErrorAction SilentlyContinue | Select-Object -Property ProcessName,Id -ErrorAction SilentlyContinue"
-  },
-  {
-    "RequestType": "GET",
-    "RequestURL": "/endpoint/status",
-    "RequestCommand": "return 1"
-  },
-  {
-    "RequestType": "GET",
-    "RequestURL": "/endpoint/routes",
-    "RequestCommand": "c:/RestPS/endPoints/GET/Invoke-GetRoutes.ps1"
-  },
-  {
-    "RequestType": "GET",
-    "RequestURL": "/process",
-    "RequestCommand": "c:/RestPS/endPoints/GET/Invoke-GetProcess.ps1"
-  },
-  {
-    "RequestType": "PUT",
-    "RequestURL": "/Service",
-    "RequestCommand": "c:/RestPS/endPoints/PUT/Invoke-GetProcess.ps1"
-  },
-  {
-    "RequestType": "POST",
-    "RequestURL": "/data",
-    "RequestCommand": "c:/RestPS/endPoints/POST/Invoke-GetProcess.ps1"
-  },
-  {
-    "RequestType": "DELETE",
-    "RequestURL": "/data",
-    "RequestCommand": "c:/RestPS/endPoints/DELETE/Invoke-GetProcess.ps1"
-  }
-]
-#>
+### Flip to the example Routes file
 
 ## Getting Started with a Simple HTTP Endpoint
 
@@ -132,6 +94,8 @@ $WebRequestParams = @{
   UseBasicParsing = $true
 }
 
+Invoke-WebRequest @WebRequestParams
+
 (Invoke-WebRequest @WebRequestParams).content
 
 # Perform Invoke-RestMethod
@@ -145,6 +109,10 @@ Invoke-RestMethod @RestMethodParams
 # When you use a web browser to visit the same Endpoint the output/results are identical.
 
 Start-Process http://localhost:8080/process?name=powershell
+
+
+Invoke-RestMethod -Method Get -Uri http://localhost:8080/endpoint/status -UseBasicParsing
+Invoke-RestMethod -Method Get -Uri http://localhost:8080/endpoint/routes -UseBasicParsing
 
 ##### Shutting down the Endpoint
 # ClientConsole
