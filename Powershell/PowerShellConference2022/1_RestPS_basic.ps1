@@ -110,8 +110,10 @@ Invoke-RestMethod @RestMethodParams
 
 Start-Process http://localhost:8080/process?name=powershell
 
-
+### Other Included endpoints
+# Status
 Invoke-RestMethod -Method Get -Uri http://localhost:8080/endpoint/status -UseBasicParsing
+# Routes
 Invoke-RestMethod -Method Get -Uri http://localhost:8080/endpoint/routes -UseBasicParsing
 
 ##### Shutting down the Endpoint
