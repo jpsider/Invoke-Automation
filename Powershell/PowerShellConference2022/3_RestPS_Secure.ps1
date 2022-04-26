@@ -20,11 +20,9 @@ You can take advantage of SSL certificates to apply three different types of sec
 ##############################
 $RESTServerCert = Get-ChildItem -Path Cert:\LocalMachine\My\ | Where-Object { $_.Subject -eq 'CN=RESTServer.PowerShellDemo.io'}
 
-
 ### Enabling an Endpoint with SSL
-
-This error; _'SSL Certificate deletion failed, Error: 2'_, caused by the failure to delete a non-existing binding, you can ignore this error.
-
+#  you can ignore this error
+'SSL Certificate deletion failed, Error: 2' caused by the failure to delete a non-existing binding
 
 # RESTServerConsole
 $RESTServerThumbprint = $RESTServerCert.Thumbprint
@@ -34,8 +32,6 @@ $ListenerParams = @{
   SSLThumbprint = "$RESTServerThumbprint"
 }
 Start-RestPSListener @ListenerParams
-
-
 
 ##############################
 # Switch to ClientConsole
@@ -51,7 +47,6 @@ $RestMethodParamsHttps = @{
 }
 Invoke-RestMethod @RestMethodParamsHttps
 
-
 # Try HTTPS
 
 $RestMethodParamsHttps = @{
@@ -63,10 +58,7 @@ Invoke-RestMethod @RestMethodParamsHttps
 
 #The following error message reflects that the SSL binding is using a Self-Signed certificate; _Invoke-RestMethod : The underlying connection was closed: Could not establish trust relationship for the SSL/TLS secure channel._
 
-To prevent this error, run the following command, `Disable-SSLValidation`, included with the RestPS module. Then run the `Invoke-RestMethod` again.
-
-
-# ClientConsole
+# To prevent this error, run the following command, `Disable-SSLValidation`, included with the RestPS module. Then run the `Invoke-RestMethod` again.
 Disable-SSLValidation
 
 # Rerun the command
@@ -276,7 +268,7 @@ $RESTServerParams = @{
 }
 Start-RestPSListener @RESTServerParams
 
-#In order for a client to authenticate with your new Endpoint an authorization type and string is required in the request headers.
+# In order for a client to authenticate with your new Endpoint an authorization type and string is required in the request headers.
 
 
 ##############################
@@ -296,8 +288,6 @@ $RestMethodParamsHttps = @{
 }
 Invoke-RestMethod @RestMethodParamsHttps
 
-401 Client failed Verification or Authentication
-
 # Perform Invoke-RestMethod command with proper headers
 $RestMethodParamsHttps = @{
   Uri = 'https://localhost:8080/process?name=powershell'
@@ -307,7 +297,6 @@ $RestMethodParamsHttps = @{
   UseBasicParsing = $true
 }
 Invoke-RestMethod @RestMethodParamsHttps
-
 
 # Shutdown the Endpoint
 $RestMethodParamsHttps = @{

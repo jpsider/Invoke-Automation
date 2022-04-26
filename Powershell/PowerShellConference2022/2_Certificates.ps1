@@ -9,9 +9,9 @@ In order to test locally create a simple hierarchy of certificates.
 * Client Certificate
   * This will be used when you access the SSL Endpoint.
 
-#### Define, Create, Review and Import the RootCA
-
-# ClientConsole
+##############################
+# Switch to ClientConsole
+##############################
 # Edit parameters to create local RootCA
 $rootCAparams = @{
   DnsName = 'PowerShellDemo.io Root Cert'
@@ -39,7 +39,6 @@ $CertStore.close()
 
 #### Define, Create and Review the RESTServer Certificate
 
-# ClientConsole
 $params = @{
   DnsName = 'RESTServer.PowerShellDemo.io'
   Signer = $rootCA # <------ Notice the Signer is the newly created RootCA
@@ -55,7 +54,6 @@ $RESTServerCert
 
 #### Define, Create and Review the Client Certificate
 
-# ClientConsole
 $params = @{
   DnsName = 'DemoClient.PowerShellDemo.io'
   FriendlyName = 'DemoClient'
@@ -86,22 +84,11 @@ $badCert = New-SelfSignedCertificate @params
 $badCert
 
 #### Review the list of Certificates in 'My' Certificate Store
+# Notice all four newly created certificates are listed.
 
-Notice all four newly created certificates are listed.
-
-# ClientConsole
 Get-ChildItem -Path Cert:\LocalMachine\My\
 
 #List of certificates in the Root Store (full list not shown), notice the newly created local RootCA.
 
-
-# ClientConsole
 Get-ChildItem -Path Cert:\LocalMachine\Root\
-Get-ChildItem -Path Cert:\LocalMachine\Root\ | where {$_.subject -like '*Demo*'}
-
-##############################
-# Switch to RESTServerConsole
-##############################
-# Set a certificate as a variable by using the `Get-ChildItem` command specifying the unique Thumbprint. This is useful when opening a new console to execute commands.
-$RESTServerCert = Get-ChildItem -Path Cert:\LocalMachine\My\ | Where-Object { $_.Subject -eq 'CN=RESTServer.PowerShellDemo.io'}
-$RESTServerCert
+Get-ChildItem -Path Cert:\LocalMachine\Root\ | Where-Object {$_.subject -like '*Demo*'}
