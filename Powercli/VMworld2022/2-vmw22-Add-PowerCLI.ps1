@@ -42,7 +42,7 @@ get-vm myvm -ErrorAction SilentlyContinue
 Write-Host "Script is complete."
 
 ###############################################################################
-# Attempt 4 - Eww it's ugly!
+# Attempt 4 - Ewww it's ugly!
 Write-Host "Let's add some Logic"
 
 $vmlist = get-vm myvm
