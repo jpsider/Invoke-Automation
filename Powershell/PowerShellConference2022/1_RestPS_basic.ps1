@@ -6,15 +6,14 @@ When you start an Endpoint you can specify several different parameters:
 
 * Port
   * A Port can be specified, but is not required. The default is 8080.
-* SSLThumbprint
+* SSLThumbprint (Optional)
   * A SSLThumbprint is used to identify the SSL certificate for the HTTPS binding, but is not required. If no SSLThumbprint is set, RestPS will default to HTTP traffic.
   * SSL can be used without a VerificationType
-* RestPSLocalRoot
+* RestPSLocalRoot (Optional)
   * RestPSLocalRoot is a local directory where Endpoint scripts are stored, but is not required. The default is C:\\RestPS
-* AppGuid
+* AppGuid (Optional)
   * An AppGuid defines an application ID (not required). If a SSLThumbprint is specified, an AppGuid will be auto-generated unless supplied as a parameter.
-* VerificationType
-  * A VerificationType (optional) - accepted values:
+* VerificationType (Optional)
     * VerifyRootCA - Verifies the Root Certificate Authority (CA) of the server and client certificate match.
     * VerifySubject - Verifies the RootCA, and the client is on a user provided Access Control List (ACL).
     * VerifyUserAuth - Provides an option for advanced authentication, plus the RootCA, subject checks.
@@ -25,49 +24,11 @@ When you start an Endpoint you can specify several different parameters:
   jpsider
   carbon
 
-### Here is the example Routes JSON file included in the RestPS module:
-<#
-[
-  {
-    "RequestType": "GET",
-    "RequestURL": "/proc",
-    "RequestCommand": "Get-Process -ProcessName PowerShell -ErrorAction SilentlyContinue | Select-Object -Property ProcessName,Id -ErrorAction SilentlyContinue"
-  },
-  {
-    "RequestType": "GET",
-    "RequestURL": "/endpoint/status",
-    "RequestCommand": "return 1"
-  },
-  {
-    "RequestType": "GET",
-    "RequestURL": "/endpoint/routes",
-    "RequestCommand": "c:/RestPS/endPoints/GET/Invoke-GetRoutes.ps1"
-  },
-  {
-    "RequestType": "GET",
-    "RequestURL": "/process",
-    "RequestCommand": "c:/RestPS/endPoints/GET/Invoke-GetProcess.ps1"
-  },
-  {
-    "RequestType": "PUT",
-    "RequestURL": "/Service",
-    "RequestCommand": "c:/RestPS/endPoints/PUT/Invoke-GetProcess.ps1"
-  },
-  {
-    "RequestType": "POST",
-    "RequestURL": "/data",
-    "RequestCommand": "c:/RestPS/endPoints/POST/Invoke-GetProcess.ps1"
-  },
-  {
-    "RequestType": "DELETE",
-    "RequestURL": "/data",
-    "RequestCommand": "c:/RestPS/endPoints/DELETE/Invoke-GetProcess.ps1"
-  }
-]
-#>
+##############################
+### Flip to the example Routes file
+##############################
 
 ## Getting Started with a Simple HTTP Endpoint
-
 Open two PowerShell consoles, 
   a REST server (RESTServerConsole) and one to represent a client (ClientConsole). 
   You can rename the PowerShell console title using the following command:
@@ -76,6 +37,8 @@ Open two PowerShell consoles,
 # Switch to RESTServerConsole
 ##############################
 Update-ConsoleTitle -Title 'RESTServerConsole'
+# Be aware that the RestPS module will change the console title when starting an Endpoint. The format looks like this : _'RestPS - http(s):// - Port: XXXX'_.
+
 
 ##############################
 # Switch to ClientConsole
@@ -83,23 +46,16 @@ Update-ConsoleTitle -Title 'RESTServerConsole'
 Update-ConsoleTitle -Title 'ClientConsole'
 
 
-Be aware that the RestPS module will change the console title when starting an Endpoint. The format looks like this : _'RestPS - http(s):// - Port: XXXX'_.
-
-To verify that an SSL certificate is not being used on port 8080 you can run the commands from the Carbon PowerShell module in the REST server console window.
-
 ##############################
 # Switch to RESTServerConsole
 ##############################
+# Check for an existing binding
 Get-CSslCertificateBinding -IPAddress 0.0.0.0 -Port 8080
 
-### Need to remove one?
-# RESTServerConsole
 # Remove a certificate binding from port 8080.
 Remove-CSslCertificateBinding -IPAddress 0.0.0.0 -Port 8080
 # Verify the binding was removed.
 Get-CSslCertificateBinding -IPAddress 0.0.0.0 -Port 8080
-
-#### Installing Required Modules
 
 #### Configure the Local Directory Structure
 
@@ -111,8 +67,6 @@ Invoke-DeployRestPS -LocalDir 'C:\RestPS'
 
 
 #### Setting up a Non-Secure Endpoint
-
-# RESTServerConsole
 $RestPSparams = @{
   RoutesFilePath = 'C:\RestPS\endpoints\RestPSRoutes.json'
   Port = '8080'
@@ -132,6 +86,8 @@ $WebRequestParams = @{
   UseBasicParsing = $true
 }
 
+Invoke-WebRequest @WebRequestParams
+
 (Invoke-WebRequest @WebRequestParams).content
 
 # Perform Invoke-RestMethod
@@ -146,8 +102,14 @@ Invoke-RestMethod @RestMethodParams
 
 Start-Process http://localhost:8080/process?name=powershell
 
+### Other Included endpoints
+
+# Status
+Invoke-RestMethod -Method Get -Uri http://localhost:8080/endpoint/status -UseBasicParsing
+# Routes
+Invoke-RestMethod -Method Get -Uri http://localhost:8080/endpoint/routes -UseBasicParsing
+
 ##### Shutting down the Endpoint
-# ClientConsole
 $RestMethodParams = @{
   Uri = 'http://localhost:8080/endpoint/shutdown'
   Method = 'Get'
