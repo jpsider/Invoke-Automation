@@ -1,4 +1,9 @@
 # We have already connected to the vCenter in the setup script.
+$Server = (Get-NetIPAddress -InterfaceAlias *wsl* -AddressFamily IPv4).IPAddress
+Disable-SSLValidation
+$Server
+Connect-VIServer -Server $Server -Port 443 -User u -Password p
+
 Get-VM
 
 Get-VM myvm
@@ -71,6 +76,7 @@ Write-Host "All Done"
 
 ###############################################################################
 # Attempt 6
+Write-Host -ForegroundColor Yellow "ErrorActionPreference = $ErrorActionPreference"
 $MyVMList = @(
     "DC0_H0_VM0",
     "DC0_H0_VM1",
@@ -88,6 +94,7 @@ Write-Host "My script is done!"
 
 ###############################################################################
 # Attempt 7
+Write-Host -ForegroundColor Yellow "ErrorActionPreference = $ErrorActionPreference"
 $MyVMList = @(
     "DC0_H0_VM0",
     "DC0_H0_VM1",

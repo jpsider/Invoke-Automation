@@ -15,7 +15,6 @@ Foreach ($vmname in $MyVMList){
         Write-Host -ForegroundColor red "The vm $vmname did not power off!"
         $ErrorMessage = $_.Exception.Message
         Write-Host -ForegroundColor Yellow "The errorMessage: $errorMessage"
-        Write-Host -ForegroundColor Yellow "FailedItem: $FailedItem"
     }
     finally {
         <#Do this after the try block regardless of whether an exception occurred or not#>

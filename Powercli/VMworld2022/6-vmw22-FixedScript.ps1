@@ -1,3 +1,4 @@
+Disconnect-VIServer -Confirm:$false
 # How about this?
 $ErrorActionPreference = "Stop"
 try {
