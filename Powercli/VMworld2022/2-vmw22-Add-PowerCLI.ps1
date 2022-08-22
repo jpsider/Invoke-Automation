@@ -57,7 +57,7 @@ Write-Host "All Done"
 
 ###############################################################################
 # Attempt 5
-Write-Host "Let's add some Logic"
+Write-Host "Let's add some Logic & smarts!"
 
 $vmlist = get-vm myvm -ErrorAction SilentlyContinue
 

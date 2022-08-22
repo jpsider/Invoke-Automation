@@ -1,7 +1,6 @@
 $MyVMList = @(
     "DC0_H0_VM0",
     "DC0_H0_VM1",
-    "myvm",
     "DC0_C0_RP0_VM1"
 )
 
@@ -21,7 +20,9 @@ Foreach ($vmname in $MyVMList){
     finally {
         <#Do this after the try block regardless of whether an exception occurred or not#>
         Start-VM -VM $vmname -Confirm:$false | Out-Null
-        Write-Host -ForegroundColor gray "This is the finally block"
+        Write-Host -ForegroundColor Green "This is the finally block"
     }
 }
     Write-Host "My script is done!"
+
+Get-VM

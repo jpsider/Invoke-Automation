@@ -26,7 +26,18 @@ Foreach ($vm in $vmlist){
         $vmname = $vm.name
         Write-Host -ForegroundColor Green "Working on $vmname"
         Stop-VM -VM $vmname -Confirm:$false | Out-Null
-        Set-VM -VM $vmname -NumCpu 4 -MemoryGB 16 -Confirm:$false | Out-Null
+    }
+    Catch {
+        $ErrorMessage = $_.Exception.Message
+        Write-Host -ForegroundColor Yellow "The errorMessage: $errorMessage"
+    }
+
+    Try {
+        if ((Get-VM $vmname).PowerState -eq "PoweredOff") {
+            Set-VM -VM $vmname -NumCpu 2 -MemoryGB 8 -Confirm:$false | Out-Null
+        } else {
+            Throw "The Virtual machine is not powered off."
+        }
         
     }
     Catch {
@@ -38,4 +49,4 @@ Foreach ($vm in $vmlist){
         Start-VM -VM $vmname -Confirm:$false | Out-Null
     }
 }
-Get-VM | Select-Object Name,NumCpu,MemoryGB | Format-Table
+Get-VM | Select-Object Name,NumCpu,MemoryGB,PowerState | Format-Table
