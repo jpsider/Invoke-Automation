@@ -20,6 +20,10 @@ Foreach ($vmname in $MyVMList){
 }
 Write-Host "My script is done!"
 
+# Power the VM's back on.
+Get-VM | Start-VM -Confirm:$false -ErrorAction SilentlyContinue
+
+
 # Get a little fancier
 Write-Host -ForegroundColor Yellow "ErrorActionPreference = $ErrorActionPreference"
 $MyVMList = @(
