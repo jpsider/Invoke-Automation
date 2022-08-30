@@ -1,5 +1,6 @@
 Disconnect-VIServer -Confirm:$false
 # How about this?
+cls
 $ErrorActionPreference = "Stop"
 try {
     $Server = (Get-NetIPAddress -InterfaceAlias *wsl* -AddressFamily IPv4).IPAddress

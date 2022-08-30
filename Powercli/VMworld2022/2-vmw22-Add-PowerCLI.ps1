@@ -62,6 +62,7 @@ Write-Host "All Done"
 
 ###############################################################################
 # Attempt 5
+cls
 Write-Host "Let's add some Logic & smarts!"
 
 $vmlist = get-vm myvm -ErrorAction SilentlyContinue
@@ -76,6 +77,7 @@ Write-Host "All Done"
 
 ###############################################################################
 # Attempt 6
+cls
 Write-Host -ForegroundColor Yellow "ErrorActionPreference = $ErrorActionPreference"
 $MyVMList = @(
     "DC0_H0_VM0",
@@ -94,6 +96,7 @@ Write-Host "My script is done!"
 
 ###############################################################################
 # Attempt 7
+cls
 Write-Host -ForegroundColor Yellow "ErrorActionPreference = $ErrorActionPreference"
 $MyVMList = @(
     "DC0_H0_VM0",

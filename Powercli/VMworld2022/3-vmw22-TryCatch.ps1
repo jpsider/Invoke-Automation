@@ -25,6 +25,7 @@ Get-VM | Start-VM -Confirm:$false -ErrorAction SilentlyContinue
 
 
 # Get a little fancier
+cls
 Write-Host -ForegroundColor Yellow "ErrorActionPreference = $ErrorActionPreference"
 $MyVMList = @(
     "DC0_H0_VM0",
@@ -53,6 +54,7 @@ Write-Host "My script is done!"
 Get-VM DC0_H0_VM1 | Stop-VM -Confirm:$false
 
 # Will all the vm's have their settings updated?
+cls
 Write-Host -ForegroundColor Yellow "ErrorActionPreference = $ErrorActionPreference"
 $MyVMList = @(
     "DC0_H0_VM0",

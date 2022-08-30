@@ -14,6 +14,7 @@ $RestMethodParams = @{
 Invoke-RestMethod @RestMethodParams
 
 # Capturing RestMethod Errors (Server not found)
+cls
 try {
     $RestMethodParams = @{
         Uri = 'http://localhost:8081/process?name=powershell'
@@ -28,6 +29,7 @@ catch {
 }
 
 # Capturing RestMethod Errors (Route not found)
+cls
 try {
     $RestMethodParams = @{
         Uri = 'http://localhost:8080/noroute'

@@ -1,3 +1,4 @@
+cls
 $MyVMList = @(
     "DC0_H0_VM0",
     "DC0_H0_VM1",
