@@ -19,10 +19,6 @@ Write-Output
 
 
 
-
-
-
-
 # Setup the Environment
 # Start the vCenter simulator container
 docker run --rm -d -p 443:443 lamw/govcsim
