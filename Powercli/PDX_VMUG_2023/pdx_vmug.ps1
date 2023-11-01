@@ -1,6 +1,19 @@
 # PDX VMUG Usercon
 
+# This is a Comment
+
+<#
+    This is also a comment
+#>
+
+Write-Output "some text" # You can comment here too!
+
 # Verb-Noun
+# Examples
+Get-Process
+Stop-Process
+Write-Output
+
 
 
 
@@ -22,3 +35,26 @@ $Server
 
 # Connect to the vCenter Simulator
 Connect-VIServer -Server $Server -Port 443 -User u -Password p
+
+# Show the connected vCenter
+$global:DefaultVIServer
+
+# Other Commands
+Get-VM
+Get-VMHost
+Get-Cluster
+Get-DataStore
+Get-Snapshot
+
+# Objects
+
+
+# Arrays vs. Hashtables
+
+
+# The Pipeline
+
+
+# Comment Based help
+
+# Toggling the PowerState
