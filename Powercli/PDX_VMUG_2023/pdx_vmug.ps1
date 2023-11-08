@@ -27,6 +27,7 @@ Install-Module -Name jpsider
 Update-Module -Name jpsider
 Import-Module -Name jpsider
 Get-Command -Module jpsider
+Save-Module -Name jpsider -Path c:\temp
 
 
 ###############################################################
@@ -63,7 +64,6 @@ Get-VM
 Get-VMHost
 Get-Cluster
 Get-DataStore
-Get-Snapshot
 
 
 ###############################################################
@@ -89,14 +89,15 @@ Get-Member -InputObject $vmlist
 Get-VM | Select-Object -Property Name
 Get-VM | Where-Object {$_.Name -like “*myvm*”}
 
-Find-Module VMware.PowerCLI
-Find-Module VMware.PowerCLI | Select Name,Version
+Get-Module -ListAvailable
+Get-Module -ListAvailable | Where-Object {$_.Name -like '*VMware.PowerCLI*'}
+Get-Module -ListAvailable  | Where-Object {$_.name -like 'VMware.PowerCLI'} | Select-Object Name,Version
 
 
 ###############################################################
 # Comment Based help
-Get-Help Get-VM -full
-Get-Help Update-ConsoleTitle -Full
+Get-Help -Name Get-VM -full
+Get-Help -Name Update-ConsoleTitle -Full
 
 
 ###############################################################
