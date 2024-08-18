@@ -13,8 +13,6 @@ $Server
 ###############################################################
 # Connect to the vCenter Simulator
 Connect-VIServer -Server $Server -Port 443 -User u -Password p
-# change the name of the first vm to "myvm"
-get-vm | Select-Object -First 1 | set-vm -name myvm -Confirm:$false
 
 # Show the connected vCenter
 $global:DefaultVIServer

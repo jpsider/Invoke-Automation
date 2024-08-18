@@ -1,0 +1,11 @@
+Tasks:
+    Get a list of Virtual machines based on a search term
+    Get the Number of VM's in the list & display it
+    Set the counter to 0
+    Loop through each VM
+        Power off the Virtual machine
+        Update the CPU count
+        Power on the vm
+        Update the Counter
+        Display the number of VM's updated so far
+    Give the final number of VM's updated
