@@ -33,6 +33,9 @@ Get-Member -InputObject (Get-VM "DC0_H0_VM0" | Get-View)
 # Filter out just items that begin with 's'
 Get-Member -InputObject (Get-VM "DC0_H0_VM0" | Get-View) | Where-Object {$_.Name -like 's*'}
 
+# Filter out just items that contain 'guest'
+Get-Member -InputObject (Get-VM "DC0_H0_VM0" | Get-View) | Where-Object {$_.Name -like '*guest*'}
+
 # Shutdown the Guest vm
 (Get-VM "DC0_H0_VM0" | Get-View).ShutdownGuest()
 
@@ -42,29 +45,29 @@ Get-VM
 
 ###############################################################
 # Run the script 
-. C:\open_projects\Invoke-Automation\Powercli\VMwareExplore_2024\PowerCLI_201_Script.ps1 "DC0_H0_VM1"
+. C:\open_projects\Invoke-Automation\Powercli\VMwareExplore_2024\PowerCLI_201\PowerCLI_201_Script.ps1 "DC0_H0_VM1"
 
 ###############################################################
 # Bonus Time!
 # What happens if we run it again?
-. C:\open_projects\Invoke-Automation\Powercli\VMwareExplore_2024\PowerCLI_201_Script.ps1 "DC0_H0_VM1"
+. C:\open_projects\Invoke-Automation\Powercli\VMwareExplore_2024\PowerCLI_201\PowerCLI_201_Script.ps1 "DC0_H0_VM1"
 
 # What happens if we don't include a VMname?
-. C:\open_projects\Invoke-Automation\Powercli\VMwareExplore_2024\PowerCLI_201_Script.ps1 
+. C:\open_projects\Invoke-Automation\Powercli\VMwareExplore_2024\PowerCLI_201\PowerCLI_201_Script.ps1 
 
 # Can we use a Parameter name? (YES!)
-. C:\open_projects\Invoke-Automation\Powercli\VMwareExplore_2024\PowerCLI_201_Script.ps1 -vmname "DC0_C0_RP0_VM0"
+. C:\open_projects\Invoke-Automation\Powercli\VMwareExplore_2024\PowerCLI_201\PowerCLI_201_Script.ps1 -vmname "DC0_C0_RP0_VM0"
 
 ###############################################################
 # Super Bonus
 # Vm does not exist
-. C:\open_projects\Invoke-Automation\Powercli\VMwareExplore_2024\PowerCLI_201_Script_on_Steroids.ps1 -vmname "DoesNotExist"
+. C:\open_projects\Invoke-Automation\Powercli\VMwareExplore_2024\PowerCLI_201\PowerCLI_201_Script_on_Steroids.ps1 -vmname "DoesNotExist"
 
 # VM is Powered OFF
-. C:\open_projects\Invoke-Automation\Powercli\VMwareExplore_2024\PowerCLI_201_Script_on_Steroids.ps1 -vmname "DC0_C0_RP0_VM0"
+. C:\open_projects\Invoke-Automation\Powercli\VMwareExplore_2024\PowerCLI_201\PowerCLI_201_Script_on_Steroids.ps1 -vmname "DC0_C0_RP0_VM0"
 
 # VM is Powered On
-. C:\open_projects\Invoke-Automation\Powercli\VMwareExplore_2024\PowerCLI_201_Script_on_Steroids.ps1 -vmname "DC0_C0_RP0_VM1"
+. C:\open_projects\Invoke-Automation\Powercli\VMwareExplore_2024\PowerCLI_201\PowerCLI_201_Script_on_Steroids.ps1 -vmname "DC0_C0_RP0_VM1"
 
 # Get Help
-Get-help -Full -Name "C:\open_projects\Invoke-Automation\Powercli\VMwareExplore_2024\PowerCLI_201_Script_on_Steroids.ps1"
+Get-help -Full -Name "C:\open_projects\Invoke-Automation\Powercli\VMwareExplore_2024\PowerCLI_201\PowerCLI_201_Script_on_Steroids.ps1"

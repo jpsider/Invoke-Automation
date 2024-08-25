@@ -1,10 +1,12 @@
 # Add the code to the psm1
+# Update the Version
+ModuleVersion = '2.0'
 # Add the Function name to the .psd1
 FunctionsToExport = @('Write-MyLog','Find-VM','Stop-MyVM','Start-MyVM','Update-VMCPU','Update-VMMem')
 # Remove the Module from the console
 Remove-Module mymodule
 # Import the module
-Import-module -Name "C:\open_projects\Invoke-Automation\Powercli\VMwareExplore_2024\module\mymodule.psd1"
+Import-module -Name "C:\open_projects\Invoke-Automation\Powercli\VMwareExplore_2024\PowerCLI_301\module_2\mymodule_2.psd1"
 
 #run the new Script!
 
