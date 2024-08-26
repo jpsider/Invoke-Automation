@@ -23,13 +23,13 @@ Catch {
 if (($thisVM | Measure-Object).count -eq 1) {
     Try {
         if($thisVM.Powerstate -like '*on'){
-            Write-Host "The vm is ON, Attempting to shutdown $vmname"
+            Write-Output "The vm is ON, Attempting to shutdown $vmname"
             ($thisVM | Get-View).ShutdownGuest()
 
-            Write-Host "Waiting 3 seconds for the guest to shutdown"
+            Write-Output "Waiting 3 seconds for the guest to shutdown"
             start-sleep -s 3
         } else {
-            Write-Host "The vm is not powered on."
+            Write-Output "The vm is not powered on."
         }
     }
     Catch {
@@ -38,13 +38,13 @@ if (($thisVM | Measure-Object).count -eq 1) {
         Throw "Could not power VM off: $ErrorMessage $FailedItem"
     }
 } elseif (($thisVM | Measure-Object).count -eq 0) {
-    Write-Host "No vm's returned"
+    Write-Output "No vm's returned"
 } else {
-    Write-Host "More than one VM returned"
+    Write-Output "More than one VM returned"
 }
 
 
-Write-Host "Status of all VMS:"
+Write-Output "Status of all VMS:"
 try {
     Get-VM
 }

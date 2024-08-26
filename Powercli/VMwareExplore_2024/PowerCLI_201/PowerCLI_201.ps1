@@ -9,8 +9,6 @@ $Server = (Get-NetIPAddress -InterfaceAlias *wsl* -AddressFamily IPv4).IPAddress
 Disable-SSLValidation
 $Server
 
-
-###############################################################
 # Connect to the vCenter Simulator
 Connect-VIServer -Server $Server -Port 443 -User u -Password p
 
@@ -71,3 +69,15 @@ Get-VM
 
 # Get Help
 Get-help -Full -Name "C:\open_projects\Invoke-Automation\Powercli\VMwareExplore_2024\PowerCLI_201\PowerCLI_201_Script_on_Steroids.ps1"
+
+###############################################################
+# We still have time?????
+# PSScriptanalyzer
+Invoke-ScriptAnalyzer -Path .\PowerCLI_201.ps1
+Invoke-ScriptAnalyzer -Path .\PowerCLI_201_Script.ps1
+Invoke-ScriptAnalyzer -Path .\PowerCLI_201_Script_on_Steroids.ps1
+
+###############################################################
+# Aliases - Don't use them!
+Set-Alias -Name Get-Datacentre -Value Get-Datacenter
+Get-Datacentre

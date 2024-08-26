@@ -44,3 +44,5 @@ Remove-Module -Name mymodule
 # Update the Module
 # Run the New script
 . C:\open_projects\Invoke-Automation\Powercli\VMwareExplore_2024\PowerCLI_301\PowerCLI_301_Script_New_function.ps1
+
+
