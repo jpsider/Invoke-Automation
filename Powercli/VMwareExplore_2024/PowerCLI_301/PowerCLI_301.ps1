@@ -9,8 +9,6 @@ $Server = (Get-NetIPAddress -InterfaceAlias *wsl* -AddressFamily IPv4).IPAddress
 Disable-SSLValidation
 $Server
 
-
-###############################################################
 # Connect to the vCenter Simulator
 Connect-VIServer -Server $Server -Port 443 -User u -Password p
 

@@ -6,6 +6,7 @@ Get a list of Virtual machines based on a search term
     Loop through each VM
         Power off the Virtual machine
         Update the CPU count
+        Update the memory 
         Power on the vm
         Update the Counter
         Display the number of VM's updated so far
