@@ -42,7 +42,7 @@ Get-VM
 
 
 ###############################################################
-# Run the script 
+# Run the script
 . C:\open_projects\Invoke-Automation\Powercli\VMwareExplore_2024\PowerCLI_201\PowerCLI_201_Script.ps1 "DC0_H0_VM1"
 
 ###############################################################
@@ -51,7 +51,7 @@ Get-VM
 . C:\open_projects\Invoke-Automation\Powercli\VMwareExplore_2024\PowerCLI_201\PowerCLI_201_Script.ps1 "DC0_H0_VM1"
 
 # What happens if we don't include a VMname?
-. C:\open_projects\Invoke-Automation\Powercli\VMwareExplore_2024\PowerCLI_201\PowerCLI_201_Script.ps1 
+. C:\open_projects\Invoke-Automation\Powercli\VMwareExplore_2024\PowerCLI_201\PowerCLI_201_Script.ps1
 
 # Can we use a Parameter name? (YES!)
 . C:\open_projects\Invoke-Automation\Powercli\VMwareExplore_2024\PowerCLI_201\PowerCLI_201_Script.ps1 -vmname "DC0_C0_RP0_VM0"
