@@ -1,5 +1,4 @@
-# PDX VMUG Usercon
-
+# PHX VMUG Usercon
 ###############################################################
 # Basics
 
@@ -25,7 +24,9 @@ Get-PSRepository
 Find-Module -Name jpsider
 Install-Module -Name jpsider
 Update-Module -Name jpsider
+Get-Module
 Import-Module -Name jpsider
+Get-Module
 Get-Command -Module jpsider
 Save-Module -Name jpsider -Path c:\temp
 
@@ -51,7 +52,6 @@ $global:DefaultVIServer
 
 # Disconnect from the vCenter
 Disconnect-VIServer -Force -Confirm:$false
-
 
 ###############################################################
 # Connect to the vCenter Simulator
