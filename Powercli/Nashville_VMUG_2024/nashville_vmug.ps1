@@ -70,7 +70,7 @@ Get-DataStore
 Get-VM           -Name              “myvm”
 
 #<Function Name>    <Parameter name>  <Parameter Value>
-Update-ConsoleTitle -Title              “Phoenix UserCon Demo”
+Update-ConsoleTitle -Title              “Nashville UserCon Demo”
 
 # Is a parameter required? PowerShell will ask!
 Update-ConsoleTitle
