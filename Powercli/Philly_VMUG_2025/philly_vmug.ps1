@@ -1,4 +1,4 @@
-# PHX VMUG Usercon
+# PHILLY VMUG Usercon
 ###############################################################
 # Basics
 
