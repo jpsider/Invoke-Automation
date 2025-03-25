@@ -80,6 +80,9 @@ Update-ConsoleTitle
 $vm = Get-VM "myvm"
 Get-Member -InputObject $vm
 
+$vmfull = Get-VM "myvm" | get-view
+Get-Member -InputObject $vmfull
+
 Get-VM "myvm" | Get-View
 
 $vmlist = Get-VM
