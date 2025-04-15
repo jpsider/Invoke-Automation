@@ -10,12 +10,13 @@ Get-VM myvm
 
 Get-VM myvm -ErrorAction Continue
 
-Get-VM myvm -ErrorAction SilentlyContinue
+Get-VM myvm -ErrorAction SilentlyContinue 
 
+Get-VM myvm -ErrorAction Continue; Get-VMHost
 
 ###############################################################################
 # Why is this important?
-
+cls
 Write-Host "Let's mess with a script."
 
 get-vm 
