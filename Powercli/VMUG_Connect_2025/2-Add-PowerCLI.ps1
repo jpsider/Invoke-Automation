@@ -12,7 +12,18 @@ Get-VM myvm -ErrorAction Continue
 
 Get-VM myvm -ErrorAction SilentlyContinue 
 
-Get-VM myvm -ErrorAction Continue; Get-VMHost
+Get-VM myvm -ErrorAction Continue; Get-VMHost "nohost" -ErrorAction stop; Write-host "Hello world"
+
+Get-VM myvm -ErrorAction Continue; Get-VMHost "nohost" -ErrorAction Continue; Write-host "Hello world"
+
+Get-VM myvm -ErrorAction SilentlyContinue; Get-VMHost "nohost" -ErrorAction SilentlyContinue; Write-host "Hello world"
+
+#What about the PipeLine?
+Get-VMHost "DC0_H0" | Get-VM
+
+Get-VMHost "nohost" -ErrorAction SilentlyContinue | Get-VM
+
+Get-VMHost "nohost" -ErrorAction SilentlyContinue | Get-VM -ErrorAction SilentlyContinue | Write-Host "nothing"
 
 ###############################################################################
 # Why is this important?

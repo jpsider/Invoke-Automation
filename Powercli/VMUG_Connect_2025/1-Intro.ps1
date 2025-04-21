@@ -12,20 +12,11 @@ New-Object foo
 $ErrorActionPreference = "SilentlyContinue"
 
 New-Object foo
+New-Object foo;Write-host "Hello world"
 
-# Reporting from cmdlets is different than system errors.
 # Reset the variable.
 $ErrorActionPreference = "Continue"
 
-# Example: Divide by Zero
-1/0
+# You may not always get what you want!
 
-# Reset the variable.
-$ErrorActionPreference = "SilentlyContinue"
-
-# Example: Divide by Zero
-1/0
-
-$ErrorActionPreference = "Continue"
-
-# Be sure to set the value you want!
+New-Object foo -ErrorAction SilentlyContinue; Write-Host "Hello World"
