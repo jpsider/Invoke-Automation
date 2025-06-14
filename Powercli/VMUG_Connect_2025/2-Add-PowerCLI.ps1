@@ -36,6 +36,7 @@ Write-Host "Script is complete."
 
 ###############################################################################
 # Attempt 1 - Remember the system preference is to Continue!
+cls
 Write-Host "Let's mess with a script."
 
 get-vm myvm
