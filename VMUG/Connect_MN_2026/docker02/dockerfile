@@ -1,0 +1,11 @@
+# Indicates the base image.
+FROM mcr.microsoft.com/powershell
+
+# Install the VMware.PowerCLI Module
+RUN pwsh -Command "Install-Module VMware.PowerCLI,ReportCardPS,jpsider -Force -Confirm:0;"
+
+# Add the Long-Running Script to the Image in the /tmp directory
+COPY sendMail.ps1 /tmp
+
+# Start the Long-Running Script at Runtime
+CMD ["pwsh", "-Command", "/tmp/sendMail.ps1"]
