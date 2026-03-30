@@ -1,4 +1,5 @@
 # Start a PowerShell Container
+docker run -it mcr.microsoft.com/powershell
 
 # Get the version of PowerShell
 $PSVersiontable.PSversion
