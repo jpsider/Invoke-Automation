@@ -17,8 +17,7 @@ docker run -it connectmn01
 Get-Module -ListAvailable
 
 # Connect to the vCenter
-Connect-VIServer -server 172.30.160.1 -user u -password p
-Connect-VIServer -server 172.30.160.1 -user u -password p
+Connect-VIServer -server 172.23.16.1 -user u -password p
 
 # List some things!
 Get-VM
@@ -28,7 +27,7 @@ Get-VMHost
 exit
 
 # Let's try this again!
-docker run -it -e vcenter="172.30.160.1" connectmn01
+docker run -it -e vcenter="172.23.16.1" connectmn01
 
 # Now lets connect to the vcenter
 Connect-VIServer -server $env:vcenter -user u -password p

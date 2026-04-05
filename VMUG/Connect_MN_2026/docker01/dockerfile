@@ -2,7 +2,7 @@
 FROM mcr.microsoft.com/powershell
 
 # Install the VMware.PowerCLI Module
-RUN pwsh -Command "Install-Module VCF.PowerCLI,jpsider -Force -Confirm:0;"
+RUN pwsh -Command "Install-Module -name VCF.PowerCLI,jpsider -Force -Confirm:0;"
 
 # Set the PowerCLI Configuration
 RUN pwsh -Command "Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -ParticipateInCeip:0 -Confirm:0"
