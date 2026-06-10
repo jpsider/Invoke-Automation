@@ -52,7 +52,8 @@ get-vm myvm -ErrorAction Stop
 Write-Host "Script is complete."
 
 ###############################################################################
-# Attempt 3 - Better!
+# Attempt 3 - Better! if you want the message at the end to print.
+cls
 Write-Host "Let's mess with a script."
 
 get-vm myvm -ErrorAction SilentlyContinue
@@ -100,15 +101,14 @@ $MyVMList = @(
 )
 
 Foreach ($vm in $MyVMList){
-    $vmname = $vm.name
-    Write-Host "Stopping vm $vmname"
+    Write-Host "Stopping vm $vm"
     Stop-VM $vm -Confirm:$false
     Write-Host "The VM is off!"
 }
 Write-Host "My script is done!"
 
 ###############################################################################
-# Attempt 7
+# Attempt 7 - Stop the processing of a script
 cls
 Write-Host -ForegroundColor Yellow "ErrorActionPreference = $ErrorActionPreference"
 $MyVMList = @(
@@ -119,8 +119,7 @@ $MyVMList = @(
 )
 
 Foreach ($vm in $MyVMList){
-    $vmname = $vm.name
-    Write-Host "Stopping vm $vmname"
+    Write-Host "Stopping vm $vm"
     Stop-VM $vm -Confirm:$false -ErrorAction Stop
     Write-Host "The VM is off!"
 }

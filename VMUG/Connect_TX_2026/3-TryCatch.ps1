@@ -23,7 +23,7 @@ Write-Host "My script is done!"
 # Power the VM's back on.
 Get-VM | Start-VM -Confirm:$false -ErrorAction SilentlyContinue
 
-
+###############################################################################
 # Get a little fancier
 cls
 Write-Host -ForegroundColor Yellow "ErrorActionPreference = $ErrorActionPreference"
