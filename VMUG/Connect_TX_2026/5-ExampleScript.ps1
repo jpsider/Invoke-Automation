@@ -9,8 +9,8 @@ $vmlist = Get-VM
 foreach ($vm in $vmlist) {
     Stop-VM -vm $vm -Confirm:$false
 }
-
-# Example 2
+###############################################################################
+# Example 2 - Validate our connection!
 Disconnect-VIServer -Confirm:$false
 cls
 $Server = (Get-NetIPAddress -InterfaceAlias *wsl* -AddressFamily IPv4).IPAddress
@@ -21,7 +21,7 @@ if ((($global:DefaultVIServer).isConnected) -eq $true) {
 } else {
     Write-host -ForegroundColor RED "We have a problem! no vCenter connection!!"
 }
-
+###############################################################################
 # Example 3
 # This is a little better
 Disconnect-VIServer -Confirm:$false
@@ -31,7 +31,7 @@ $vmlist = Get-VM
 foreach ($vm in $vmlist) {
     Stop-VM -vm $vm -Confirm:$false
 }
-
+###############################################################################
 # Example 4
 # There are a ton of options out there, not all are right.
 cls

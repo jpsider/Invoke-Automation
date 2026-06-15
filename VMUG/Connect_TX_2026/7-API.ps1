@@ -27,7 +27,7 @@ catch {
     $ErrorMessage = $_.Exception.Message
     Write-Host -ForegroundColor Yellow "The errorMessage: $errorMessage"
 }
-
+###############################################################################
 # Capturing RestMethod Errors (Route not found)
 cls
 try {
