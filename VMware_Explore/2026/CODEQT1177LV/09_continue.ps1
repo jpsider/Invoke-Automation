@@ -1,6 +1,6 @@
 # Using Break
 
-$numbers = 1..25
+$numbers = 1..50
 foreach ($num in $numbers) {
     if ($num -like “*3*”)
     {
