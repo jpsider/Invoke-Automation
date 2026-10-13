@@ -45,6 +45,7 @@ Write-Host "Script is complete."
 
 ###############################################################################
 # Attempt 2 - What if we stop?
+cls
 Write-Host "Let's mess with a script."
 
 get-vm myvm -ErrorAction Stop
